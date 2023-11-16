@@ -236,7 +236,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
           className={styles.calendarBottomText}
-          style={{ fill: isWeekend(date) ? "#FF3333" : "#333" }}
+          style={{ fill: isWeekend(date) ? "#DB4437" : "#333" }}
         >
           {bottomValue}
         </text>
