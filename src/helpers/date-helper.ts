@@ -180,9 +180,13 @@ export const seedDates = (
   return dates;
 };
 
-export const getLocaleMonth = (date: Date, locale: string) => {
+export const getLocaleMonth = (
+  date: Date,
+  locale: string,
+  format: "long" | "short" | "narrow" | undefined = "long"
+) => {
   let bottomValue = getCachedDateTimeFormat(locale, {
-    month: "long",
+    month: format,
   }).format(date);
   bottomValue = bottomValue.replace(
     bottomValue[0],
@@ -204,6 +208,13 @@ export const getLocalDayOfWeek = (
     bottomValue[0].toLocaleUpperCase()
   );
   return bottomValue;
+};
+
+export const isWeekend = (date: Date) => {
+  const day = date.getDay();
+
+  // Check if the day is Saturday (6) or Sunday (0)
+  return day === 0 || day === 6;
 };
 
 /**

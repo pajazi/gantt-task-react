@@ -7,6 +7,7 @@ import {
   getLocalDayOfWeek,
   getLocaleMonth,
   getWeekNumberISO8601,
+  isWeekend,
 } from "../../helpers/date-helper";
 import { DateSetup } from "../../types/date-setup";
 import styles from "./calendar.module.css";
@@ -221,7 +222,11 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${getLocalDayOfWeek(date, locale, "short")}, ${date
+      const bottomValue = `${getLocalDayOfWeek(
+        date,
+        locale,
+        "short"
+      )}, ${getLocaleMonth(date, locale, "short")} ${date
         .getDate()
         .toString()}`;
 
@@ -231,6 +236,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
           className={styles.calendarBottomText}
+          style={{ fill: isWeekend(date) ? "#FF3333" : "#333" }}
         >
           {bottomValue}
         </text>
