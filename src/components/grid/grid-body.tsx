@@ -1,5 +1,5 @@
 import React, { ReactChild } from "react";
-import { Task } from "../../types/public-types";
+import { Task, ViewMode } from "../../types/public-types";
 import { addToDate, isWeekend } from "../../helpers/date-helper";
 import styles from "./grid.module.css";
 
@@ -11,6 +11,7 @@ export type GridBodyProps = {
   columnWidth: number;
   todayColor: string;
   rtl: boolean;
+  viewMode: ViewMode;
 };
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
@@ -20,6 +21,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   columnWidth,
   todayColor,
   rtl,
+  viewMode,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -74,7 +76,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
         className={styles.gridTick}
       />
     );
-    if (isWeekend(date)) {
+    if (isWeekend(date) && viewMode === ViewMode.Day) {
       weekends.push(
         <rect
           x={tickX}

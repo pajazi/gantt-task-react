@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import { GridProps, Grid } from "../grid/grid";
-import { CalendarProps, Calendar } from "../calendar/calendar";
-import { TaskGanttContentProps, TaskGanttContent } from "./task-gantt-content";
+import React, { useEffect, useRef } from "react";
+import { Grid, GridProps } from "../grid/grid";
+import { Calendar, CalendarProps } from "../calendar/calendar";
+import { TaskGanttContent, TaskGanttContentProps } from "./task-gantt-content";
 import styles from "./gantt.module.css";
 
 export type TaskGanttProps = {
