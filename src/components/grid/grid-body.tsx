@@ -1,6 +1,6 @@
 import React, { ReactChild } from "react";
 import { Task } from "../../types/public-types";
-import { addToDate } from "../../helpers/date-helper";
+import { addToDate, isWeekend } from "../../helpers/date-helper";
 import styles from "./grid.module.css";
 
 export type GridBodyProps = {
@@ -61,6 +61,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   let tickX = 0;
   const ticks: ReactChild[] = [];
   let today: ReactChild = <rect />;
+  const weekends: ReactChild[] = [];
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
     ticks.push(
@@ -73,6 +74,18 @@ export const GridBody: React.FC<GridBodyProps> = ({
         className={styles.gridTick}
       />
     );
+    if (isWeekend(date)) {
+      weekends.push(
+        <rect
+          x={tickX}
+          y={0}
+          width={columnWidth}
+          height={y}
+          fill="#E9E9E9"
+          fillOpacity={0.6}
+        />
+      );
+    }
     if (
       (i + 1 !== dates.length &&
         date.getTime() < now.getTime() &&
@@ -122,6 +135,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
       <g className="rowLines">{rowLines}</g>
       <g className="ticks">{ticks}</g>
       <g className="today">{today}</g>
+      <g className="weekends">{weekends}</g>
     </g>
   );
 };
