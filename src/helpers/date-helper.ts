@@ -217,6 +217,8 @@ export const isWeekend = (date: Date) => {
   return day === 0 || day === 6;
 };
 
+export const isSunday = (date: Date) => date.getDay() === 0;
+
 /**
  * Returns monday of current week
  * @param date date for modify

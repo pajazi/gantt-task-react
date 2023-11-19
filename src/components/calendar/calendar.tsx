@@ -7,7 +7,7 @@ import {
   getLocalDayOfWeek,
   getLocaleMonth,
   getWeekNumberISO8601,
-  isWeekend,
+  isSunday,
 } from "../../helpers/date-helper";
 import { DateSetup } from "../../types/date-setup";
 import styles from "./calendar.module.css";
@@ -236,7 +236,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           y={headerHeight * 0.8}
           x={columnWidth * i + columnWidth * 0.5}
           className={styles.calendarBottomText}
-          style={{ fill: isWeekend(date) ? "#DB4437" : "#333" }}
+          style={{ fill: isSunday(date) ? "#DB4437" : "#333" }}
         >
           {bottomValue}
         </text>
