@@ -117,6 +117,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
             : style.barLabel && style.barLabelOutside
         }
         ref={textRef}
+        style={{display: task.type !== 'project' ? 'none' : ''}}
       >
         {task.name}
       </text>
