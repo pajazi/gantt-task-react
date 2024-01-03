@@ -117,6 +117,7 @@ export interface StylingOption {
     task: Task;
     fontSize: string;
     fontFamily: string;
+    onClick: () => void;
   }>;
   TaskListHeader?: React.FC<{
     headerHeight: number;
