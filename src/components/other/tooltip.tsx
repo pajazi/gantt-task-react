@@ -17,10 +17,12 @@ export type TooltipProps = {
   rowHeight: number;
   fontSize: string;
   fontFamily: string;
+  onClose: () => void;
   TooltipContent: React.FC<{
     task: Task;
     fontSize: string;
     fontFamily: string;
+    onClose?: () => void;
   }>;
 };
 export const Tooltip: React.FC<TooltipProps> = ({
@@ -37,6 +39,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   headerHeight,
   taskListWidth,
   TooltipContent,
+  onClose,
 }) => {
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [relatedY, setRelatedY] = useState(0);
@@ -101,13 +104,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
     <div
       ref={tooltipRef}
       className={
-        relatedX
+        !!task
           ? styles.tooltipDetailsContainer
           : styles.tooltipDetailsContainerHidden
       }
       style={{ left: relatedX, top: relatedY }}
     >
-      <TooltipContent task={task} fontSize={fontSize} fontFamily={fontFamily} />
+      <TooltipContent task={task} fontSize={fontSize} fontFamily={fontFamily} onClose={onClose} />
     </div>
   );
 };

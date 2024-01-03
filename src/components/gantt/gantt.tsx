@@ -80,6 +80,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const [svgContainerWidth, setSvgContainerWidth] = useState(0);
   const [svgContainerHeight, setSvgContainerHeight] = useState(ganttHeight);
   const [barTasks, setBarTasks] = useState<BarTask[]>([]);
+  const [activeTooltip, setActiveTooltip] = useState<BarTask | null>(null)
   const [ganttEvent, setGanttEvent] = useState<GanttEvent>({
     action: "",
   });
@@ -428,7 +429,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     onDateChange,
     onProgressChange,
     onDoubleClick,
-    onClick,
+    onClick: (task) => setActiveTooltip(task),
     onDelete,
   };
 
@@ -467,7 +468,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           scrollY={scrollY}
           scrollX={scrollX}
         />
-        {ganttEvent.changedTask && (
+        {!!activeTooltip && (
           <Tooltip
             arrowIndent={arrowIndent}
             rowHeight={rowHeight}
@@ -477,10 +478,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
             fontSize={fontSize}
             scrollX={scrollX}
             scrollY={scrollY}
-            task={ganttEvent.changedTask}
+            task={activeTooltip}
             headerHeight={headerHeight}
             taskListWidth={taskListWidth}
             TooltipContent={TooltipContent}
+            onClose={() => setActiveTooltip(null)}
             rtl={rtl}
             svgWidth={svgWidth}
           />
